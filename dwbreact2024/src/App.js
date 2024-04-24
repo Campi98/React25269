@@ -1,7 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
+import React, { useEffect } from 'react';
+import { getCenas } from './Services/ceninhas';
 
 function App() {
+
+  useEffect(() => { 
+    getCenas().then((response) => {
+      console.log(response);
+    });
+  }, []);
+
+
+
   return (
     <div className="App">
       <header className="App-header">
