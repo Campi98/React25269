@@ -1,3 +1,10 @@
+/*<<<<<<< CampiBranch
+import logo from './logo.svg';
+import './App.css';
+import React, { useEffect } from 'react';
+import { getCenas } from './Services/ceninhas'; */
+
+// main branch
 import React from 'react';
 import '@fortawesome/fontawesome-free/css/all.css';
 import MainNavbar from './Components/GeneralComponents/MainNavbar';
@@ -5,7 +12,17 @@ import SiginPage from './pages/Sigin/signin';
 import { Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage/HomePage';
 
+
 function App() {
+
+  useEffect(() => { 
+    getCenas().then((response) => {
+      console.log(response);
+    });
+  }, []);
+
+
+
   return (
     <div>
     <div id="page-top">
