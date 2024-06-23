@@ -1,11 +1,10 @@
 /*<<<<<<< CampiBranch
-import logo from './logo.svg';
-import './App.css';
-import React, { useEffect } from 'react';
-import { getCenas } from './Services/ceninhas'; */
+import logo from './logo.svg'; */
 
 // main branch
-import React from 'react';
+import React, { useEffect } from 'react';
+import { getCenas } from './Services/ceninhas';
+import './App.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import MainNavbar from './Components/GeneralComponents/MainNavbar';
 import SiginPage from './pages/Sigin/signin';
