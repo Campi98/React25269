@@ -13,7 +13,27 @@ function ContactSection() {
                                 <i className="fas fa-map-marked-alt text-primary mb-2"></i>
                                 <h4 className="text-uppercase m-0">Address</h4>
                                 <hr className="my-4 mx-auto" />
-                                <div className="small text-black-50">4923 Market Street, Orlando FL</div>
+                                <div className="small text-black-50">Instituto Politécnico de Tomar</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-md-4 mb-3 mb-md-0">
+                        <div className="card py-4 h-100">
+                            <div className="card-body text-center">
+                                <i className="fas fa-mobile-alt text-primary mb-2"></i>
+                                <h4 className="text-uppercase m-0">Disciplina</h4>
+                                <hr className="my-4 mx-auto" />
+                                <div className="small text-black-50">Desenvolvimento Web 2023/2024</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-md-4 mb-3 mb-md-0">
+                        <div className="card py-4 h-100">
+                            <div className="card-body text-center">
+                                <i className="fas fa-mobile-alt text-primary mb-2"></i>
+                                <h4 className="text-uppercase m-0">Made by</h4>
+                                <hr className="my-4 mx-auto" />
+                                <div className="small text-black-50">João Campos nº 25269</div>
                             </div>
                         </div>
                     </div>

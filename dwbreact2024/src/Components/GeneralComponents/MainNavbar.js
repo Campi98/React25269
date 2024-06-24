@@ -6,7 +6,7 @@ function MainNavbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
             <div className="container px-4 px-lg-5">
-                <Link className="navbar-brand" to="/">NomeApp + Logo</Link>
+                <Link className="navbar-brand" to="/">TripBuddy Connect + Logo</Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu&nbsp;
                     <i className="fas fa-bars"></i>
