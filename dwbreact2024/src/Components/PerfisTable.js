@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Button, Modal, Form } from 'react-bootstrap';
-import api from '../api';  // Certifique-se que a instância axios está configurada corretamente
+import api from '../api';
 
 const PerfisTable = () => {
     const [perfis, setPerfis] = useState([]);
@@ -22,7 +22,7 @@ const PerfisTable = () => {
 
     const fetchPerfis = async () => {
         try {
-            const response = await api.get('/perfis'); // Certifique-se que o endpoint está correto
+            const response = await api.get('/perfis');
             setPerfis(response.data);
         } catch (error) {
             console.error('Erro ao buscar perfis:', error);
