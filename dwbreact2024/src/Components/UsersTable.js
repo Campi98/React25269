@@ -22,7 +22,6 @@ const UsersTable = () => {
     const fetchUsers = async () => {
         try {
             const response = await getUsers();
-            console.log(response.data);
             setUsers(response.data);
         } catch (error) {
             console.error('Erro ao dar fetch aos utilizadores:', error);
@@ -45,17 +44,11 @@ const UsersTable = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Submitting form", userForm);
         try {
             if (isEditing) {
-                console.log(`Editing user with ID: ${currentUserId}`);
-                console.log(`PUT /users/${currentUserId}`, userForm);
-                const response = await api.put(`/users/${currentUserId}`, userForm);
-                console.log('PUT response:', response);
+                await api.put(`/users/${currentUserId}`, userForm);
             } else {
-                console.log("Creating new user");
-                const response = await api.post('/users', userForm);
-                console.log('POST response:', response);
+                await api.post('/users', userForm);
             }
             fetchUsers();
             setShowModal(false);
@@ -79,7 +72,11 @@ const UsersTable = () => {
 
     return (
         <div>
-            <Button variant="primary" onClick={() => { setIsEditing(false); setUserForm({ id_do_User: '', nome: '', email: '', senha: '', tipo: '' }); setShowModal(true); }}>Criar Novo Utilizador</Button>
+            <Button variant="primary" onClick={() => { 
+                setIsEditing(false); 
+                setUserForm({ nome: '', email: '', senha: '', tipo: '' }); 
+                setShowModal(true); 
+            }}>Criar Novo Utilizador</Button>
             
             <Modal show={showModal} onHide={() => setShowModal(false)}>
                 <Modal.Header closeButton>

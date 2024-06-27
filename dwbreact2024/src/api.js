@@ -5,7 +5,6 @@ const api = axios.create({
 });
 
 export const getUsers = () => api.get('/users');
-export const getViagens = () => api.get('/viagens');
 // TODO: Add more routes
 
 export default api;
