@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Button, Modal, Form } from 'react-bootstrap';
+import { Table, Button, Modal, Form, Alert } from 'react-bootstrap';
 import api, { getAvaliacoes } from '../api';
 
 const AvaliacoesTable = () => {
@@ -8,13 +8,13 @@ const AvaliacoesTable = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [currentAvaliacaoId, setCurrentAvaliacaoId] = useState(null);
     const [avaliacaoForm, setAvaliacaoForm] = useState({
-        id_da_Avaliacao: '',
         id_do_Avaliador: '',
         id_do_Avaliado: '',
         classificacao: '',
         comentario: '',
         data: ''
     });
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         fetchAvaliacoes();
@@ -46,22 +46,32 @@ const AvaliacoesTable = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            const formattedData = {
+                ...avaliacaoForm,
+                id_do_Avaliador: parseInt(avaliacaoForm.id_do_Avaliador, 10),
+                id_do_Avaliado: parseInt(avaliacaoForm.id_do_Avaliado, 10),
+                classificacao: parseInt(avaliacaoForm.classificacao, 10),
+            };
             if (isEditing) {
-                await api.put(`/avaliacoes/${currentAvaliacaoId}`, avaliacaoForm);
+                await api.put(`/avaliacoes/${currentAvaliacaoId}`, formattedData);
             } else {
-                await api.post('/avaliacoes', avaliacaoForm);
+                await api.post('/avaliacoes', formattedData);
             }
             fetchAvaliacoes();
             setShowModal(false);
+            setErrors({});
         } catch (error) {
-            console.error('Erro ao criar ou editar avaliação:', error);
+            if (error.response && error.response.data) {
+                setErrors(error.response.data.errors || {});
+            } else {
+                console.error('Erro ao criar ou editar avaliação:', error);
+            }
         }
     };
 
     const handleEdit = (avaliacao) => {
         setCurrentAvaliacaoId(avaliacao.id_da_Avaliacao);
         setAvaliacaoForm({
-            id_da_Avaliacao: avaliacao.id_da_Avaliacao,
             id_do_Avaliador: avaliacao.id_do_Avaliador,
             id_do_Avaliado: avaliacao.id_do_Avaliado,
             classificacao: avaliacao.classificacao,
@@ -85,6 +95,15 @@ const AvaliacoesTable = () => {
                     <Modal.Title>{isEditing ? 'Editar Avaliação' : 'Criar Nova Avaliação'}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                    {Object.keys(errors).length > 0 && (
+                        <Alert variant="danger">
+                            <ul>
+                                {Object.keys(errors).map((key, index) => (
+                                    <li key={index}>{errors[key].join(', ')}</li>
+                                ))}
+                            </ul>
+                        </Alert>
+                    )}
                     <Form onSubmit={handleSubmit}>
                         <Form.Group controlId="formAvaliador">
                             <Form.Label>Avaliador</Form.Label>
@@ -93,7 +112,6 @@ const AvaliacoesTable = () => {
                                 name="id_do_Avaliador" 
                                 value={avaliacaoForm.id_do_Avaliador} 
                                 onChange={handleInputChange} 
-                                required 
                             />
                         </Form.Group>
                         <Form.Group controlId="formAvaliado">
@@ -103,7 +121,6 @@ const AvaliacoesTable = () => {
                                 name="id_do_Avaliado" 
                                 value={avaliacaoForm.id_do_Avaliado} 
                                 onChange={handleInputChange} 
-                                required 
                             />
                         </Form.Group>
                         <Form.Group controlId="formClassificacao">
@@ -113,7 +130,6 @@ const AvaliacoesTable = () => {
                                 name="classificacao" 
                                 value={avaliacaoForm.classificacao} 
                                 onChange={handleInputChange} 
-                                required 
                             />
                         </Form.Group>
                         <Form.Group controlId="formComentario">
@@ -123,7 +139,6 @@ const AvaliacoesTable = () => {
                                 name="comentario" 
                                 value={avaliacaoForm.comentario} 
                                 onChange={handleInputChange} 
-                                required 
                             />
                         </Form.Group>
                         <Form.Group controlId="formData">
@@ -133,7 +148,6 @@ const AvaliacoesTable = () => {
                                 name="data" 
                                 value={avaliacaoForm.data} 
                                 onChange={handleInputChange} 
-                                required 
                             />
                         </Form.Group>
                         <Button variant="primary" type="submit">

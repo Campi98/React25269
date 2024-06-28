@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Button, Modal, Form } from 'react-bootstrap';
-import api, { getGruposDeViagem } from '../api';
+import { getGruposDeViagem, createGrupoDeViagem, updateGrupoDeViagem, deleteGrupoDeViagem } from '../api';
 
 const GruposDeViagemTable = () => {
     const [gruposDeViagem, setGruposDeViagem] = useState([]);
@@ -8,7 +8,6 @@ const GruposDeViagemTable = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [currentGrupoId, setCurrentGrupoId] = useState(null);
     const [grupoForm, setGrupoForm] = useState({
-        id_do_Grupo: '',
         adminUser: '',
         nome_do_Grupo: '',
         destino: '',
@@ -26,13 +25,13 @@ const GruposDeViagemTable = () => {
             const response = await getGruposDeViagem();
             setGruposDeViagem(response.data);
         } catch (error) {
-            console.error('Erro ao buscar grupos de viagem:', error);
+            console.error('Erro ao dar fetch aos grupos de viagem:', error);
         }
     };
 
     const handleDelete = async (id) => {
         try {
-            await api.delete(`/grupos_de_viagem/${id}`);
+            await deleteGrupoDeViagem(id);
             fetchGruposDeViagem();
         } catch (error) {
             console.error('Erro ao eliminar o grupo de viagem:', error);
@@ -48,9 +47,9 @@ const GruposDeViagemTable = () => {
         e.preventDefault();
         try {
             if (isEditing) {
-                await api.put(`/grupos_de_viagem/${currentGrupoId}`, grupoForm);
+                await updateGrupoDeViagem(currentGrupoId, grupoForm);
             } else {
-                await api.post('/grupos_de_viagem', grupoForm);
+                await createGrupoDeViagem(grupoForm);
             }
             fetchGruposDeViagem();
             setShowModal(false);
@@ -62,12 +61,11 @@ const GruposDeViagemTable = () => {
     const handleEdit = (grupo) => {
         setCurrentGrupoId(grupo.id_do_Grupo);
         setGrupoForm({
-            id_do_Grupo: grupo.id_do_Grupo,
             adminUser: grupo.adminUser,
             nome_do_Grupo: grupo.nome_do_Grupo,
             destino: grupo.destino,
-            data_de_Inicio: grupo.data_de_Inicio,
-            data_de_Fim: grupo.data_de_Fim,
+            data_de_Inicio: grupo.data_de_Inicio.split('T')[0],
+            data_de_Fim: grupo.data_de_Fim.split('T')[0],
             descricao: grupo.descricao
         });
         setIsEditing(true);

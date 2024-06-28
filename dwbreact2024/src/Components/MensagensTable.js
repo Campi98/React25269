@@ -25,7 +25,7 @@ const MensagensTable = () => {
             const response = await getMensagens();
             setMensagens(response.data);
         } catch (error) {
-            console.error('Erro ao buscar mensagens:', error);
+            console.error('Erro ao dar fetch às mensagens:', error);
         }
     };
 

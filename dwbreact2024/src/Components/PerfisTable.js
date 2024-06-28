@@ -25,7 +25,7 @@ const PerfisTable = () => {
             const response = await api.get('/perfis');
             setPerfis(response.data);
         } catch (error) {
-            console.error('Erro ao buscar perfis:', error);
+            console.error('Erro ao dar fetch aos perfis:', error);
         }
     };
 
