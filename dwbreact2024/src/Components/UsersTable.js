@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Button, Modal, Form } from 'react-bootstrap';
+import { Table, Button, Modal, Form, Alert } from 'react-bootstrap';
 import api, { getUsers } from '../api';
 
 const UsersTable = () => {
@@ -14,6 +14,7 @@ const UsersTable = () => {
         senha: '',
         tipo: ''
     });
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         fetchUsers();
@@ -52,8 +53,13 @@ const UsersTable = () => {
             }
             fetchUsers();
             setShowModal(false);
+            setErrors({});
         } catch (error) {
-            console.error('Erro ao criar ou editar utilizador:', error);
+            if (error.response && error.response.data) {
+                setErrors(error.response.data.errors || {});
+            } else {
+                console.error('Erro ao criar ou editar utilizador:', error);
+            }
         }
     };
 
@@ -83,6 +89,15 @@ const UsersTable = () => {
                     <Modal.Title>{isEditing ? 'Editar Utilizador' : 'Criar Novo Utilizador'}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                    {Object.keys(errors).length > 0 && (
+                        <Alert variant="danger">
+                            <ul>
+                                {Object.keys(errors).map((key, index) => (
+                                    <li key={index}>{errors[key].join(', ')}</li>
+                                ))}
+                            </ul>
+                        </Alert>
+                    )}
                     <Form onSubmit={handleSubmit}>
                         <Form.Group controlId="formNome">
                             <Form.Label>Nome</Form.Label>
@@ -91,7 +106,6 @@ const UsersTable = () => {
                                 name="nome" 
                                 value={userForm.nome} 
                                 onChange={handleInputChange} 
-                                required 
                             />
                         </Form.Group>
                         <Form.Group controlId="formEmail">
@@ -101,7 +115,6 @@ const UsersTable = () => {
                                 name="email" 
                                 value={userForm.email} 
                                 onChange={handleInputChange} 
-                                required 
                             />
                         </Form.Group>
                         <Form.Group controlId="formSenha">
@@ -111,7 +124,6 @@ const UsersTable = () => {
                                 name="senha" 
                                 value={userForm.senha} 
                                 onChange={handleInputChange} 
-                                required 
                             />
                         </Form.Group>
                         <Form.Group controlId="formTipo">
@@ -121,7 +133,6 @@ const UsersTable = () => {
                                 name="tipo" 
                                 value={userForm.tipo} 
                                 onChange={handleInputChange} 
-                                required 
                             />
                         </Form.Group>
                         <Button variant="primary" type="submit">

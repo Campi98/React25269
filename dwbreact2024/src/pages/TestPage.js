@@ -2,6 +2,8 @@ import React from 'react';
 import UsersTable from '../Components/UsersTable';
 import PerfisTable from '../Components/PerfisTable';
 import AvaliacoesTable from '../Components/AvaliacoesTable';
+import GruposDeViagemTable from '../Components/GruposDeViagemTable';
+import MensagensTable from '../Components/MensagensTable';
 
 const TestPage = () => {
     return (
@@ -11,6 +13,8 @@ const TestPage = () => {
             <UsersTable />
             <PerfisTable />
             <AvaliacoesTable />
+            <GruposDeViagemTable />
+            <MensagensTable />
         </div>
     );
 };
