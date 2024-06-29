@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Button, Modal, Form } from 'react-bootstrap';
-import api, { getMensagens } from '../api';
+import api from '../api';
 
 const MensagensTable = () => {
     const [mensagens, setMensagens] = useState([]);
@@ -8,7 +8,6 @@ const MensagensTable = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [currentMensagemId, setCurrentMensagemId] = useState(null);
     const [mensagemForm, setMensagemForm] = useState({
-        id_da_Mensagem: '',
         id_do_Remetente: '',
         id_do_Destinatario: '',
         conteudo: '',
@@ -22,7 +21,7 @@ const MensagensTable = () => {
 
     const fetchMensagens = async () => {
         try {
-            const response = await getMensagens();
+            const response = await api.get('/mensagens');
             setMensagens(response.data);
         } catch (error) {
             console.error('Erro ao dar fetch às mensagens:', error);
@@ -61,11 +60,10 @@ const MensagensTable = () => {
     const handleEdit = (mensagem) => {
         setCurrentMensagemId(mensagem.id_da_Mensagem);
         setMensagemForm({
-            id_da_Mensagem: mensagem.id_da_Mensagem,
             id_do_Remetente: mensagem.id_do_Remetente,
             id_do_Destinatario: mensagem.id_do_Destinatario,
             conteudo: mensagem.conteudo,
-            data_e_Hora: mensagem.data_e_Hora,
+            data_e_Hora: mensagem.data_e_Hora.split('.')[0],
             fotografia_do_User: mensagem.fotografia_do_User
         });
         setIsEditing(true);

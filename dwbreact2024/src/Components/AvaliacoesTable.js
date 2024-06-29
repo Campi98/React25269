@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Button, Modal, Form, Alert } from 'react-bootstrap';
-import api, { getAvaliacoes } from '../api';
+import api from '../api';
 
 const AvaliacoesTable = () => {
     const [avaliacoes, setAvaliacoes] = useState([]);
@@ -22,10 +22,14 @@ const AvaliacoesTable = () => {
 
     const fetchAvaliacoes = async () => {
         try {
-            const response = await getAvaliacoes();
-            setAvaliacoes(response.data);
+            const response = await api.get('/avaliacoes');
+            const formattedData = response.data.map(avaliacao => ({
+                ...avaliacao,
+                data: new Date(avaliacao.data).toISOString().split('T')[0] // Formata a data para YYYY-MM-DD
+            }));
+            setAvaliacoes(formattedData);
         } catch (error) {
-            console.error('Erro ao dar fetch às avaliações:', error);
+            console.error('Erro ao buscar as avaliações:', error);
         }
     };
 
@@ -45,24 +49,29 @@ const AvaliacoesTable = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Formatação da data para ISO antes de enviar ao servidor
+        const formattedAvaliacaoForm = {
+            ...avaliacaoForm,
+            data: new Date(avaliacaoForm.data).toISOString()
+        };
+
+        console.log('Submitting:', formattedAvaliacaoForm); // Log the payload for debugging
+
         try {
-            const formattedData = {
-                ...avaliacaoForm,
-                id_do_Avaliador: parseInt(avaliacaoForm.id_do_Avaliador, 10),
-                id_do_Avaliado: parseInt(avaliacaoForm.id_do_Avaliado, 10),
-                classificacao: parseInt(avaliacaoForm.classificacao, 10),
-            };
             if (isEditing) {
-                await api.put(`/avaliacoes/${currentAvaliacaoId}`, formattedData);
+                await api.put(`/avaliacoes/${currentAvaliacaoId}`, formattedAvaliacaoForm);
             } else {
-                await api.post('/avaliacoes', formattedData);
+                await api.post('/avaliacoes', formattedAvaliacaoForm);
             }
             fetchAvaliacoes();
             setShowModal(false);
             setErrors({});
         } catch (error) {
+            console.error('Error submitting form:', error);
             if (error.response && error.response.data) {
                 setErrors(error.response.data.errors || {});
+                alert('Failed to submit: ' + JSON.stringify(error.response.data.errors));
             } else {
                 console.error('Erro ao criar ou editar avaliação:', error);
             }
@@ -82,13 +91,22 @@ const AvaliacoesTable = () => {
         setShowModal(true);
     };
 
+    const handleCreate = () => {
+        setCurrentAvaliacaoId(null);
+        setAvaliacaoForm({
+            id_do_Avaliador: '',
+            id_do_Avaliado: '',
+            classificacao: '',
+            comentario: '',
+            data: ''
+        });
+        setIsEditing(false);
+        setShowModal(true);
+    };
+
     return (
         <div>
-            <Button variant="primary" onClick={() => { 
-                setIsEditing(false); 
-                setAvaliacaoForm({ id_do_Avaliador: '', id_do_Avaliado: '', classificacao: '', comentario: '', data: '' }); 
-                setShowModal(true); 
-            }}>Criar Nova Avaliação</Button>
+            <Button variant="primary" onClick={handleCreate}>Criar Nova Avaliação</Button>
             
             <Modal show={showModal} onHide={() => setShowModal(false)}>
                 <Modal.Header closeButton>
@@ -99,7 +117,7 @@ const AvaliacoesTable = () => {
                         <Alert variant="danger">
                             <ul>
                                 {Object.keys(errors).map((key, index) => (
-                                    <li key={index}>{errors[key].join(', ')}</li>
+                                    <li key={index}>{errors[key]}</li>
                                 ))}
                             </ul>
                         </Alert>
@@ -144,7 +162,7 @@ const AvaliacoesTable = () => {
                         <Form.Group controlId="formData">
                             <Form.Label>Data</Form.Label>
                             <Form.Control 
-                                type="date" 
+                                type="datetime-local" 
                                 name="data" 
                                 value={avaliacaoForm.data} 
                                 onChange={handleInputChange} 

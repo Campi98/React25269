@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Button, Modal, Form } from 'react-bootstrap';
-import { getGruposDeViagem, createGrupoDeViagem, updateGrupoDeViagem, deleteGrupoDeViagem } from '../api';
+import api from '../api';
 
 const GruposDeViagemTable = () => {
     const [gruposDeViagem, setGruposDeViagem] = useState([]);
@@ -22,7 +22,7 @@ const GruposDeViagemTable = () => {
 
     const fetchGruposDeViagem = async () => {
         try {
-            const response = await getGruposDeViagem();
+            const response = await api.get('/gruposdeviagem');
             setGruposDeViagem(response.data);
         } catch (error) {
             console.error('Erro ao dar fetch aos grupos de viagem:', error);
@@ -31,7 +31,7 @@ const GruposDeViagemTable = () => {
 
     const handleDelete = async (id) => {
         try {
-            await deleteGrupoDeViagem(id);
+            await api.delete(`/gruposdeviagem/${id}`);
             fetchGruposDeViagem();
         } catch (error) {
             console.error('Erro ao eliminar o grupo de viagem:', error);
@@ -47,9 +47,9 @@ const GruposDeViagemTable = () => {
         e.preventDefault();
         try {
             if (isEditing) {
-                await updateGrupoDeViagem(currentGrupoId, grupoForm);
+                await api.put(`/gruposdeviagem/${currentGrupoId}`, grupoForm);
             } else {
-                await createGrupoDeViagem(grupoForm);
+                await api.post('/gruposdeviagem', grupoForm);
             }
             fetchGruposDeViagem();
             setShowModal(false);

@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { getUsers } from './api';
+import React/*, { useEffect }*/ from 'react';
+//import { getUsers } from './api';
 import './App.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import SiginPage from './pages/Sigin/signin';
@@ -9,13 +9,13 @@ import TestPage from './pages/TestPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  useEffect(() => {
+  /*useEffect(() => {
     getUsers().then((response) => {
       console.log(response.data);
     }).catch((error) => {
       console.error('Erro ao dar fetch aos utilizadores:', error);
     });
-  }, []);
+  }, []);*/
 
   return (
     <div>

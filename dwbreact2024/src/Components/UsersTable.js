@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Button, Modal, Form, Alert } from 'react-bootstrap';
-import api, { getUsers } from '../api';
+import api from '../api';
 
 const UsersTable = () => {
     const [users, setUsers] = useState([]);
@@ -22,7 +22,7 @@ const UsersTable = () => {
 
     const fetchUsers = async () => {
         try {
-            const response = await getUsers();
+            const response = await api.get('/users');
             setUsers(response.data);
         } catch (error) {
             console.error('Erro ao dar fetch aos utilizadores:', error);
