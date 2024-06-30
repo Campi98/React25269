@@ -28,4 +28,10 @@ export const deleteAvaliacao = (id) => api.delete(`/avaliacoes/${id}`);
 export const deleteGrupoDeViagem = (id) => api.delete(`/gruposdeviagem/${id}`);
 export const deleteMensagem = (id) => api.delete(`/mensagens/${id}`);
 
+// Funções para imagens
+export const getImagens = () => api.get('/imagens');
+export const saveImage = (image) => api.post('/imagens/saveImagem', { imagem: image });
+export const getImagemById = (id) => api.get(`/imagens/${id}`);
+export const deleteImage = (id) => api.delete(`/imagens/${id}`);
+
 export default api;
