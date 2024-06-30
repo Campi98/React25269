@@ -9,8 +9,7 @@ import ImagensTable from '../Components/ImagensTable';
 const TestPage = () => {
     return (
         <div>
-            <h1>Página de Testes</h1>
-            <p>Esta é uma página de testes para o CRUD.</p>
+            <h1>Página de Testes para o CRUD.</h1>
             <ImagensTable />
             <UsersTable />
             <PerfisTable />
