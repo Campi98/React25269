@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Button, Modal, Form, Alert } from 'react-bootstrap';
-import api from '../api';
+import { getAvaliacoes, createAvaliacao, updateAvaliacao, deleteAvaliacao } from '../api';
 
 const AvaliacoesTable = () => {
     const [avaliacoes, setAvaliacoes] = useState([]);
@@ -22,20 +22,20 @@ const AvaliacoesTable = () => {
 
     const fetchAvaliacoes = async () => {
         try {
-            const response = await api.get('/avaliacoes');
+            const response = await getAvaliacoes();
             const formattedData = response.data.map(avaliacao => ({
                 ...avaliacao,
-                data: new Date(avaliacao.data).toISOString().split('T')[0] // Formata a data para YYYY-MM-DD
+                data: new Date(avaliacao.data).toISOString().split('T')[0] // alterar isto... não funciona
             }));
             setAvaliacoes(formattedData);
         } catch (error) {
-            console.error('Erro ao buscar as avaliações:', error);
+            console.error('Erro ao dar fetch às avaliações:', error);
         }
     };
 
     const handleDelete = async (id) => {
         try {
-            await api.delete(`/avaliacoes/${id}`);
+            await deleteAvaliacao(id);
             fetchAvaliacoes();
         } catch (error) {
             console.error('Erro ao eliminar a avaliação:', error);
@@ -50,19 +50,19 @@ const AvaliacoesTable = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Formatação da data para ISO antes de enviar ao servidor
+        // Formatação da data para ISO antes de enviar ao servidor (não funciona...)
         const formattedAvaliacaoForm = {
             ...avaliacaoForm,
             data: new Date(avaliacaoForm.data).toISOString()
         };
 
-        console.log('Submitting:', formattedAvaliacaoForm); // Log the payload for debugging
+        console.log('Submitting:', formattedAvaliacaoForm); // debugging
 
         try {
             if (isEditing) {
-                await api.put(`/avaliacoes/${currentAvaliacaoId}`, formattedAvaliacaoForm);
+                await updateAvaliacao(currentAvaliacaoId, formattedAvaliacaoForm);
             } else {
-                await api.post('/avaliacoes', formattedAvaliacaoForm);
+                await createAvaliacao(formattedAvaliacaoForm);
             }
             fetchAvaliacoes();
             setShowModal(false);

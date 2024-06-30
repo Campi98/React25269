@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Button, Modal, Form, Alert } from 'react-bootstrap';
-import api from '../api';
+import { getUsers, createUser, updateUser, deleteUser } from '../api';
 
 const UsersTable = () => {
     const [users, setUsers] = useState([]);
@@ -22,7 +22,7 @@ const UsersTable = () => {
 
     const fetchUsers = async () => {
         try {
-            const response = await api.get('/users');
+            const response = await getUsers();
             setUsers(response.data);
         } catch (error) {
             console.error('Erro ao dar fetch aos utilizadores:', error);
@@ -31,7 +31,7 @@ const UsersTable = () => {
 
     const handleDelete = async (id) => {
         try {
-            await api.delete(`/users/${id}`);
+            await deleteUser(id);
             fetchUsers();
         } catch (error) {
             console.error('Erro ao eliminar o utilizador:', error);
@@ -47,9 +47,9 @@ const UsersTable = () => {
         e.preventDefault();
         try {
             if (isEditing) {
-                await api.put(`/users/${currentUserId}`, userForm);
+                await updateUser(currentUserId, userForm);
             } else {
-                await api.post('/users', userForm);
+                await createUser(userForm);
             }
             fetchUsers();
             setShowModal(false);

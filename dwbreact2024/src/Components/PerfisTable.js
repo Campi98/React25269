@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Button, Modal, Form } from 'react-bootstrap';
-import api from '../api';
+import { getPerfis, createPerfil, updatePerfil, deletePerfil } from '../api';
 
 const PerfisTable = () => {
     const [perfis, setPerfis] = useState([]);
@@ -22,7 +22,7 @@ const PerfisTable = () => {
 
     const fetchPerfis = async () => {
         try {
-            const response = await api.get('/perfis');
+            const response = await getPerfis();
             setPerfis(response.data);
         } catch (error) {
             console.error('Erro ao dar fetch aos perfis:', error);
@@ -31,7 +31,7 @@ const PerfisTable = () => {
 
     const handleDelete = async (id) => {
         try {
-            await api.delete(`/perfis/${id}`);
+            await deletePerfil(id);
             fetchPerfis();
         } catch (error) {
             console.error('Erro ao eliminar perfil:', error);
@@ -47,9 +47,9 @@ const PerfisTable = () => {
         e.preventDefault();
         try {
             if (isEditing) {
-                await api.put(`/perfis/${currentPerfilId}`, perfilForm);
+                await updatePerfil(currentPerfilId, perfilForm);
             } else {
-                await api.post('/perfis', perfilForm);
+                await createPerfil(perfilForm);
             }
             fetchPerfis();
             setShowModal(false);

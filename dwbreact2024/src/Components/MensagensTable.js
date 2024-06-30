@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Button, Modal, Form } from 'react-bootstrap';
-import api from '../api';
+import { getMensagens, createMensagem, updateMensagem, deleteMensagem } from '../api';
 
 const MensagensTable = () => {
     const [mensagens, setMensagens] = useState([]);
@@ -21,7 +21,7 @@ const MensagensTable = () => {
 
     const fetchMensagens = async () => {
         try {
-            const response = await api.get('/mensagens');
+            const response = await getMensagens();
             setMensagens(response.data);
         } catch (error) {
             console.error('Erro ao dar fetch às mensagens:', error);
@@ -30,7 +30,7 @@ const MensagensTable = () => {
 
     const handleDelete = async (id) => {
         try {
-            await api.delete(`/mensagens/${id}`);
+            await deleteMensagem(id);
             fetchMensagens();
         } catch (error) {
             console.error('Erro ao eliminar a mensagem:', error);
@@ -46,9 +46,9 @@ const MensagensTable = () => {
         e.preventDefault();
         try {
             if (isEditing) {
-                await api.put(`/mensagens/${currentMensagemId}`, mensagemForm);
+                await updateMensagem(currentMensagemId, mensagemForm);
             } else {
-                await api.post('/mensagens', mensagemForm);
+                await createMensagem(mensagemForm);
             }
             fetchMensagens();
             setShowModal(false);

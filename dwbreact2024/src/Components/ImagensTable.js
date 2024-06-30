@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Button, Modal } from 'react-bootstrap';
-import api from '../api';
+import { getImagens, deleteImage } from '../api';
 import ImgHandler from './ImgHandler';
 
 const ImagensTable = () => {
@@ -13,7 +13,7 @@ const ImagensTable = () => {
 
     const fetchImagens = async () => {
         try {
-            const response = await api.get('/imagens');
+            const response = await getImagens();
             setImagens(response.data);
         } catch (error) {
             console.error('Erro ao dar fetch às imagens:', error);
@@ -22,7 +22,7 @@ const ImagensTable = () => {
 
     const handleDelete = async (id) => {
         try {
-            await api.delete(`/imagens/${id}`);
+            await deleteImage(id);
         } catch (error) {
             console.error('Erro ao eliminar a imagem:', error);
         } finally {
