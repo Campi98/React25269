@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Button, Modal } from 'react-bootstrap';
-import { getImagens, deleteImage } from '../api';
-import ImgHandler from './ImgHandler';
+import { getImagens, deleteImage } from '../../Services/api';
+import ImgHandler from '../ImgHandler';
 
 const ImagensTable = () => {
     const [imagens, setImagens] = useState([]);

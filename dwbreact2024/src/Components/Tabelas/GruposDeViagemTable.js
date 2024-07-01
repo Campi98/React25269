@@ -1,5 +1,5 @@
 import React from 'react';
-import { getGruposDeViagem, createGrupoDeViagem, updateGrupoDeViagem, deleteGrupoDeViagem } from '../api';
+import { getGruposDeViagem, createGrupoDeViagem, updateGrupoDeViagem, deleteGrupoDeViagem } from '../../Services/api';
 import GenericTable from './GenericTable';
 
 const GruposDeViagemTable = () => {

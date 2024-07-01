@@ -1,5 +1,5 @@
 import React from 'react';
-import { getPerfis, createPerfil, updatePerfil, deletePerfil } from '../api';
+import { getPerfis, createPerfil, updatePerfil, deletePerfil } from '../../Services/api';
 import GenericTable from './GenericTable';
 
 const PerfisTable = () => {

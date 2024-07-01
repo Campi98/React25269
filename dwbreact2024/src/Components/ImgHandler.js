@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
-import { saveImage } from '../api';
+import { saveImage } from '../Services/api';
 
 const ImgHandler = ({ onUploadSuccess }) => {
     const [errors, setErrors] = useState({});

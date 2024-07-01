@@ -1,5 +1,5 @@
 import React from 'react';
-import { getUsers, createUser, updateUser, deleteUser } from '../api';
+import { getUsers, createUser, updateUser, deleteUser } from '../../Services/api';
 import GenericTable from './GenericTable';
 
 const UsersTable = () => {

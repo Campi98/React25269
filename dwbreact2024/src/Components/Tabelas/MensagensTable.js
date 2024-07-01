@@ -1,5 +1,5 @@
 import React from 'react';
-import { getMensagens, createMensagem, updateMensagem, deleteMensagem } from '../api';
+import { getMensagens, createMensagem, updateMensagem, deleteMensagem } from '../../Services/api';
 import GenericTable from './GenericTable';
 
 const MensagensTable = () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { getAvaliacoes, createAvaliacao, updateAvaliacao, deleteAvaliacao } from '../api';
+import { getAvaliacoes, createAvaliacao, updateAvaliacao, deleteAvaliacao } from '../../Services/api';
 import GenericTable from './GenericTable';
 
 const AvaliacoesTable = () => {
