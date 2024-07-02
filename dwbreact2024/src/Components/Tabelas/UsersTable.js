@@ -11,7 +11,7 @@ const UsersTable = () => {
     ];
 
     const tableHeaders = ['ID', 'Nome', 'Email', 'Senha', 'Tipo'];
-    const tableRowData = ['id_do_User', 'nome', 'email', 'senha', 'tipo'];
+    const tableRowData = ['iD_do_User', 'nome', 'email', 'senha', 'tipo'];
 
     return (
         <GenericTable
@@ -22,8 +22,8 @@ const UsersTable = () => {
             formFields={formFields}
             tableHeaders={tableHeaders}
             tableRowData={tableRowData}
-            itemKey="id_do_User"
-            itemName="Utilizador"
+            itemKey="iD_do_User"
+            itemName="Usuário"
         />
     );
 };

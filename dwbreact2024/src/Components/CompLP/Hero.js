@@ -1,12 +1,15 @@
 import * as React from 'react';
 import { alpha } from '@mui/material';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
-import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+
+
+
+import Button from '@mui/material/Button';
+
+import TextField from '@mui/material/TextField';
 
 export default function Hero() {
   return (
@@ -69,30 +72,33 @@ export default function Hero() {
             useFlexGap
             sx={{ pt: 2, width: { xs: '100%', sm: 'auto' } }}
           >
-            <TextField
-              id="outlined-basic"
-              hiddenLabel
-              size="small"
-              variant="outlined"
-              aria-label="Enter your email address"
-              placeholder="Your email address"
-              inputProps={{
-                autoComplete: 'off',
-                'aria-label': 'Enter your email address',
-              }}
-            />
-            <Button variant="contained" color="primary">
-              Start now
-            </Button>
           </Stack>
-          <Typography variant="caption" textAlign="center" sx={{ opacity: 0.8 }}>
-            By clicking &quot;Start now&quot; you agree to our&nbsp;
-            <Link href="#" color="primary">
-              Terms & Conditions
-            </Link>
-            .
-          </Typography>
         </Stack>
+        <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 2,
+          mt: 4,
+          width: '100%',
+        }}
+      >
+        <TextField
+          id="search-bar"
+          hiddenLabel
+          size="small"
+          variant="outlined"
+          fullWidth
+          placeholder="Search..."
+          inputProps={{
+            autoComplete: 'off',
+            'aria-label': 'Search',
+          }}
+        />
+        <Button variant="contained" color="primary" sx={{ alignSelf: 'center', mt: 2 }}>
+          Search
+        </Button>
+      </Box>
         <Box
           id="image"
           sx={(theme) => ({
@@ -102,8 +108,8 @@ export default function Hero() {
             width: '100%',
             backgroundImage:
               theme.palette.mode === 'light'
-                ? 'url("/static/images/templates/templates-images/hero-light.png")'
-                : 'url("/static/images/templates/templates-images/hero-dark.png")',
+                ? 'url("https://wallpapers.com/images/hd/beautiful-travel-1920-x-1080-wallpaper-3ujfzquudegwil3x.jpg")'
+                : 'url("https://wallpapers.com/images/hd/beautiful-travel-1920-x-1080-wallpaper-3ujfzquudegwil3x.jpg")',
             backgroundSize: 'cover',
             borderRadius: '10px',
             outline: '1px solid',

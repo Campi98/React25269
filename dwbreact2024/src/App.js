@@ -11,6 +11,10 @@ import LandingPage from './pages/LandingPage/LandingPage';
 
 function App() {
 
+  // Código de Terceiros:
+  // Sign-In-Side / Sign-Up / Landing Page:
+  // https://github.com/mui/material-ui/tree/v5.15.21/docs/data/material/getting-started/templates
+
   return (
     <div>
       <div id="page-top">

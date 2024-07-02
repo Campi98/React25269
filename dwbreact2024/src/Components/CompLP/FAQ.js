@@ -4,7 +4,6 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -38,7 +37,7 @@ export default function FAQ() {
           textAlign: { sm: 'left', md: 'center' },
         }}
       >
-        Frequently asked questions
+        FAQ
       </Typography>
       <Box sx={{ width: '100%' }}>
         <Accordion
@@ -51,7 +50,7 @@ export default function FAQ() {
             id="panel1d-header"
           >
             <Typography component="h3" variant="subtitle2">
-              How do I contact customer support if I have a question or issue?
+            É seguro usar a plataforma?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -60,10 +59,7 @@ export default function FAQ() {
               gutterBottom
               sx={{ maxWidth: { sm: '100%', md: '70%' } }}
             >
-              You can reach our customer support team by emailing
-              <Link> support@email.com </Link>
-              or calling our toll-free number. We&apos;re here to assist you
-              promptly.
+              Trabalhamos para garantir que a plataforma seja segura. As avaliações e classificações ajudam a manter uma comunidade confiável. Recomendamos sempre verificar as avaliações de outros utilizadores antes de se juntar a um grupo de viagem.
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -77,7 +73,7 @@ export default function FAQ() {
             id="panel2d-header"
           >
             <Typography component="h3" variant="subtitle2">
-              Can I return the product if it doesn&apos;t meet my expectations?
+            Quem pode usar a plataforma?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -86,9 +82,19 @@ export default function FAQ() {
               gutterBottom
               sx={{ maxWidth: { sm: '100%', md: '70%' } }}
             >
-              Absolutely! We offer a hassle-free return policy. If you&apos;re not
-              completely satisfied, you can return the product within [number of
-              days] days for a full refund or exchange.
+              A plataforma é destinada a diferentes tipos de viajantes.
+
+            <Typography
+
+            >
+              <span style={{ color: 'lightblue' }}>Viajantes Aventureiros:</span> Pessoas que adoram novas experiências e querem partilhar as suas aventuras.
+              <br />
+              <span style={{ color: 'lightblue' }}>Viajantes Solitários:</span> Pessoas que preferem viajar com companhia e procuram parceiros de viagem.
+              <br />
+              <span style={{ color: 'lightblue' }}>Viajantes Económicos:</span> Aqueles que procuram formas de tornar as suas viagens mais acessíveis, dividindo custos.
+              <br />
+              <span style={{ color: 'lightblue' }}>Viajantes Sociais: </span>Indivíduos que valorizam a interação social durante as viagens.
+            </Typography>
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -102,7 +108,7 @@ export default function FAQ() {
             id="panel3d-header"
           >
             <Typography component="h3" variant="subtitle2">
-              What makes your product stand out from others in the market?
+            Como posso criar um perfil?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -111,9 +117,7 @@ export default function FAQ() {
               gutterBottom
               sx={{ maxWidth: { sm: '100%', md: '70%' } }}
             >
-              Our product distinguishes itself through its adaptability, durability,
-              and innovative features. We prioritize user satisfaction and
-              continually strive to exceed expectations in every aspect.
+              Para criar um perfil, basta registar-se na plataforma e preencher as informações detalhadas sobre os seus interesses de viagem, destinos favoritos e nível de experiência.
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -127,7 +131,7 @@ export default function FAQ() {
             id="panel4d-header"
           >
             <Typography component="h3" variant="subtitle2">
-              Is there a warranty on the product, and what does it cover?
+            Posso participar em mais de um grupo de viagem?
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -136,10 +140,7 @@ export default function FAQ() {
               gutterBottom
               sx={{ maxWidth: { sm: '100%', md: '70%' } }}
             >
-              Yes, our product comes with a [length of warranty] warranty. It covers
-              defects in materials and workmanship. If you encounter any issues
-              covered by the warranty, please contact our customer support for
-              assistance.
+              Sim, pode participar em vários grupos de viagem, desde que esteja interessado nos destinos e atividades propostos por esses grupos.
             </Typography>
           </AccordionDetails>
         </Accordion>

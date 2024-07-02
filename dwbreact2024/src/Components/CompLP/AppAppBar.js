@@ -84,16 +84,14 @@ function AppAppBar({ mode, toggleColorMode }) {
               }}
             >
               <img
-                src={
-                  'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/61f12e6faf73568658154dae_SitemarkDefault.svg'
-                }
+              src={require('./site_ico.png')}
                 style={logoStyle}
                 alt="logo of sitemark"
               />
               <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                 <MenuItem
                   onClick={() => scrollToSection('features')}
-                  sx={{ py: '6px', px: '12px' }}
+                  sx={{ py: '6px', px: '20px' }}
                 >
                   <Typography variant="body2" color="text.primary">
                     Features
@@ -104,7 +102,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                   sx={{ py: '6px', px: '12px' }}
                 >
                   <Typography variant="body2" color="text.primary">
-                    Testimonials
+                    Top Críticos
                   </Typography>
                 </MenuItem>
                 <MenuItem
@@ -113,14 +111,6 @@ function AppAppBar({ mode, toggleColorMode }) {
                 >
                   <Typography variant="body2" color="text.primary">
                     Highlights
-                  </Typography>
-                </MenuItem>
-                <MenuItem
-                  onClick={() => scrollToSection('pricing')}
-                  sx={{ py: '6px', px: '12px' }}
-                >
-                  <Typography variant="body2" color="text.primary">
-                    Pricing
                   </Typography>
                 </MenuItem>
                 <MenuItem
@@ -148,7 +138,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                 component="a"
                 href="/signIn"
               >
-                Sign in
+                Entrar
               </Button>
               <Button
                 color="primary"
@@ -157,7 +147,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                 component="a"
                 href="/SignUp"
               >
-                Sign up
+                Criar Conta
               </Button>
             </Box>
             <Box sx={{ display: { sm: '', md: 'none' } }}>

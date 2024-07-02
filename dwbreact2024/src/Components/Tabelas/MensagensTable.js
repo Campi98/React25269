@@ -4,15 +4,14 @@ import GenericTable from './GenericTable';
 
 const MensagensTable = () => {
     const formFields = [
-        { label: 'Remetente', type: 'number', name: 'id_do_Remetente' },
-        { label: 'Destinatário', type: 'number', name: 'id_do_Destinatario' },
         { label: 'Conteúdo', type: 'text', name: 'conteudo' },
-        { label: 'Data e Hora', type: 'datetime-local', name: 'data_e_Hora' },
-        { label: 'Fotografia', type: 'number', name: 'fotografia_do_User' }
+        { label: 'Data e Hora', type: 'datetime-local', name: 'data_e_hora' },
+        { label: 'ID do Remetente', type: 'number', name: 'id_do_remetente' },
+        { label: 'ID do Destinatario', type: 'number', name: 'id_do_destinatario' }
     ];
 
-    const tableHeaders = ['ID', 'Remetente', 'Destinatário', 'Conteúdo', 'Data e Hora', 'Fotografia'];
-    const tableRowData = ['id_da_Mensagem', 'id_do_Remetente', 'id_do_Destinatario', 'conteudo', 'data_e_Hora', 'fotografia_do_User'];
+    const tableHeaders = ['ID', 'Conteúdo', 'Data e Hora', 'ID do Remetente', 'ID do Destinatario'];
+    const tableRowData = ['iD_da_Mensagem', 'conteudo', 'data_e_hora', 'id_do_remetente', 'id_do_destinatario'];
 
     return (
         <GenericTable
@@ -23,7 +22,7 @@ const MensagensTable = () => {
             formFields={formFields}
             tableHeaders={tableHeaders}
             tableRowData={tableRowData}
-            itemKey="id_da_Mensagem"
+            itemKey="iD_da_Mensagem"
             itemName="Mensagem"
         />
     );

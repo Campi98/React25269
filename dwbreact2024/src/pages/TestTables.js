@@ -1,21 +1,25 @@
 import React from 'react';
 import UsersTable from '../Components/Tabelas/UsersTable';
 import PerfisTable from '../Components/Tabelas/PerfisTable';
-import AvaliacoesTable from '../Components/Tabelas/AvaliacoesTable';
+import ViagensTable from '../Components/Tabelas/ViagensTable';
 import GruposDeViagemTable from '../Components/Tabelas/GruposDeViagemTable';
+import AlojamentosTable from '../Components/Tabelas/AlojamentosTable';
 import MensagensTable from '../Components/Tabelas/MensagensTable';
-import ImagensTable from '../Components/Tabelas/ImagensTable';
+
+
 
 const TestTables = () => {
     return (
         <div>
-            <h1>Página de Testes para o CRUD.</h1>
-            <ImagensTable />
+            <h1>Testing:</h1>
+            <AlojamentosTable />
+            <MensagensTable />
+
+            <h1>Funceminam:</h1>
+            <GruposDeViagemTable />
+            <ViagensTable />
             <UsersTable />
             <PerfisTable />
-            <AvaliacoesTable />
-            <GruposDeViagemTable />
-            <MensagensTable />
         </div>
     );
 };
