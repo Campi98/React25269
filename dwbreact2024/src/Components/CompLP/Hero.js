@@ -89,14 +89,14 @@ export default function Hero() {
           size="small"
           variant="outlined"
           fullWidth
-          placeholder="Search..."
+          placeholder="Pesquisar Viagens..."
           inputProps={{
             autoComplete: 'off',
             'aria-label': 'Search',
           }}
         />
         <Button variant="contained" color="primary" sx={{ alignSelf: 'center', mt: 2 }}>
-          Search
+        Pesquisar
         </Button>
       </Box>
         <Box

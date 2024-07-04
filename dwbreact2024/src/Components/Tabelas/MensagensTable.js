@@ -11,7 +11,7 @@ const MensagensTable = () => {
     ];
 
     const tableHeaders = ['ID', 'Conteúdo', 'Data e Hora', 'ID do Remetente', 'ID do Destinatario'];
-    const tableRowData = ['iD_da_Mensagem', 'conteudo', 'data_e_hora', 'id_do_remetente', 'id_do_destinatario'];
+    const tableRowData = ['iD_da_Mensagem', 'conteudo', 'data_e_Hora', 'iD_do_Remetente', 'iD_do_Destinatario'];
 
     return (
         <GenericTable

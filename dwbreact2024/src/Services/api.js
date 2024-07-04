@@ -10,6 +10,7 @@ export const createAlojamento = (alojamento) => api.post('/alojamentos', alojame
 export const updateAlojamento = (id, alojamento) => api.put(`/alojamentos/${id}`, alojamento);
 export const deleteAlojamento = (id) => api.delete(`/alojamentos/${id}`);
 
+
 // Avaliações
 export const getAvaliacoes = () => api.get('/avaliacoes');
 export const createAvaliacao = (avaliacao) => api.post('/avaliacoes', avaliacao);
