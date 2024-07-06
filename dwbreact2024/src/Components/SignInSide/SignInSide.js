@@ -12,6 +12,8 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
+import { loginUser } from '../../Services/api';
 
 function Copyright(props) {
   return (
@@ -29,13 +31,23 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignInSide() {
-  const handleSubmit = (event) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const user = {
       email: data.get('email'),
       password: data.get('password'),
-    });
+    };
+
+    try {
+      await loginUser(user);
+      // Redirecionar para pág. guarded
+      navigate('/');
+    } catch (error) {
+      console.error('Login failed', error);
+    }
   };
 
   return (
@@ -48,8 +60,7 @@ export default function SignInSide() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage:
-              'url("https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/a9/9a/bf/caption.jpg?w=1200&h=-1&s=1")',
+            backgroundImage: 'url("https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/a9/9a/bf/caption.jpg?w=1200&h=-1&s=1")',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
             backgroundSize: 'cover',

@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const api = axios.create({
   baseURL: 'https://localhost:7070/api',
+  withCredentials: true,
 });
 
 // Alojamentos
@@ -9,7 +10,6 @@ export const getAlojamentos = () => api.get('/alojamentos');
 export const createAlojamento = (alojamento) => api.post('/alojamentos', alojamento);
 export const updateAlojamento = (id, alojamento) => api.put(`/alojamentos/${id}`, alojamento);
 export const deleteAlojamento = (id) => api.delete(`/alojamentos/${id}`);
-
 
 // Avaliações
 export const getAvaliacoes = () => api.get('/avaliacoes');
@@ -22,7 +22,6 @@ export const getGruposDeViagem = () => api.get('/Grupo_de_Viagem');
 export const createGrupoDeViagem = (grupoDeViagem) => api.post('/Grupo_de_Viagem', grupoDeViagem);
 export const updateGrupoDeViagem = (id, grupoDeViagem) => api.put(`/Grupo_de_Viagem/${id}`, grupoDeViagem);
 export const deleteGrupoDeViagem = (id) => api.delete(`/Grupo_de_Viagem/${id}`);
-
 
 // Imagens
 export const getImagens = () => api.get('/imagens');
@@ -53,5 +52,9 @@ export const getViagens = () => api.get('/viagens');
 export const createViagem = (viagem) => api.post('/viagens', viagem);
 export const updateViagem = (id, viagem) => api.put(`/viagens/${id}`, viagem);
 export const deleteViagem = (id) => api.delete(`/viagens/${id}`);
+
+// Authentication
+export const loginUser = (user) => api.post('/account/login', user);
+export const registerUser = (user) => api.post('/account/register', user);
 
 export default api;
