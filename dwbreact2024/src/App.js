@@ -10,6 +10,9 @@ import TestSignInSide from './pages/TestSignInSide';
 import LandingPage from './pages/LandingPage/LandingPage';
 import ProtectedRoute from './Components/LoginAuth/ProtectedRoute';
 import { AuthProvider } from './Components/LoginAuth/AuthContext';
+import UserStatus from './Components/UserStatus';
+import PublicRoute from './Components/LoginAuth/PublicRoute';
+import UserProfile from './pages/UserProfile';
 
 function App() {
 
@@ -27,8 +30,22 @@ function App() {
               <TestTables />
             </ProtectedRoute>
           } />
-          <Route path="/SignUp" element={<TestComponent />} />
-          <Route path="/SignIn" element={<TestSignInSide />} />
+          <Route path="/SignUp" element={
+            <PublicRoute>
+              <TestComponent />
+            </PublicRoute>
+          } />
+          <Route path="/SignIn" element={
+            <PublicRoute>
+              <TestSignInSide />
+            </PublicRoute>
+          } />
+          <Route path="/user-status" element={<UserStatus />} />
+          <Route path="/profile" element={
+            <ProtectedRoute>
+              <UserProfile />
+            </ProtectedRoute>
+          } />
         </Routes>
       </div>
     </AuthProvider>

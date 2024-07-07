@@ -59,4 +59,8 @@ export const registerUser = (user) => api.post('/account/register', user);
 export const logoutUser = () => api.post('/account/logout');
 export const checkAuthStatus = () => api.get('/account/status');
 
+
+// novo
+export const getUserProfile = (id) => api.get(`/perfis/${id}`);  
+
 export default api;
