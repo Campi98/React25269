@@ -56,5 +56,7 @@ export const deleteViagem = (id) => api.delete(`/viagens/${id}`);
 // Authentication
 export const loginUser = (user) => api.post('/account/login', user);
 export const registerUser = (user) => api.post('/account/register', user);
+export const logoutUser = () => api.post('/account/logout');
+export const checkAuthStatus = () => api.get('/account/status');
 
 export default api;

@@ -13,7 +13,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-import { loginUser } from '../../Services/api';
+import { useAuth } from '../../Components/LoginAuth/AuthContext';
 
 function Copyright(props) {
   return (
@@ -32,6 +32,7 @@ const defaultTheme = createTheme();
 
 export default function SignInSide() {
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -42,9 +43,8 @@ export default function SignInSide() {
     };
 
     try {
-      await loginUser(user);
-      // Redirecionar para pág. guarded
-      navigate('/');
+      await login(user);
+      navigate('/test');    // Redirecionar para pág. guarded
     } catch (error) {
       console.error('Login failed', error);
     }

@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import AppAppBar from '../../Components/CompLP/AppAppBar';
+import AuthenticatedAppBar from '../../Components/CompLP/AuthenticatedAppBar';
 import Hero from '../../Components/CompLP/Hero';
 import Highlights from '../../Components/CompLP/Highlights';
 import Features from '../../Components/CompLP/Features';
@@ -11,10 +12,12 @@ import Testimonials from '../../Components/CompLP/Testimonials';
 import FAQ from '../../Components/CompLP/FAQ';
 import Footer from '../../Components/CompLP/Footer';
 import getLPTheme from './getLPTheme';
+import { useAuth } from '../../Components/LoginAuth/AuthContext';
 
 export default function LandingPage() {
   const [mode, setMode] = React.useState('dark');
   const LPtheme = createTheme(getLPTheme(mode));
+  const { isAuthenticated } = useAuth();
 
   const toggleColorMode = () => {
     setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
@@ -23,7 +26,11 @@ export default function LandingPage() {
   return (
     <ThemeProvider theme={LPtheme}>
       <CssBaseline />
-      <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
+      {isAuthenticated ? (
+        <AuthenticatedAppBar mode={mode} toggleColorMode={toggleColorMode} />
+      ) : (
+        <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
+      )}
       <Hero />
       <Box sx={{ bgcolor: 'background.default' }}>
         <Features />
@@ -31,7 +38,6 @@ export default function LandingPage() {
         <Testimonials />
         <Divider />
         <Highlights />
-        <Divider />
         <Divider />
         <FAQ />
         <Divider />
