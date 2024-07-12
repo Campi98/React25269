@@ -10,7 +10,6 @@ import TestSignInSide from './pages/TestSignInSide';
 import LandingPage from './pages/LandingPage/LandingPage';
 import ProtectedRoute from './Components/LoginAuth/ProtectedRoute';
 import { AuthProvider } from './Components/LoginAuth/AuthContext';
-import UserStatus from './Components/UserStatus';
 import PublicRoute from './Components/LoginAuth/PublicRoute';
 import UserProfile from './pages/UserProfile';
 import Viagens from './pages/Viagens';
@@ -46,7 +45,6 @@ function App() {
               <TestSignInSide />
             </PublicRoute>
           } />
-          <Route path="/user-status" element={<UserStatus />} />
           <Route path="/profile" element={
             <ProtectedRoute>
               <UserProfile />

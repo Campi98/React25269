@@ -12,6 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import ToggleColorMode from './ToggleColorMode';
+import { Link } from 'react-router-dom';
 
 const logoStyle = {
   width: '140px',
@@ -83,27 +84,24 @@ function AppAppBar({ mode, toggleColorMode }) {
                 px: 0,
               }}
             >
-              <img
-              src={require('./site_ico.png')}
-                style={logoStyle}
-                alt="logo of sitemark"
-              />
+              <Link to="/">
+                <img
+                  src={require('./site_ico.png')}
+                  style={logoStyle}
+                  alt="logo of sitemark"
+                  onClick={(e) => {
+                    e.preventDefault(); // Prevent Link navigation
+                    window.scrollTo(0, 0); // Scroll to the top of the page
+                  }}
+                />
+              </Link>
               <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                 <MenuItem
-                  onClick={() => scrollToSection('features')}
+                  component={Link}
+                  to="/"
                   sx={{ py: '6px', px: '20px' }}
                 >
-                  <Typography variant="body2" color="text.primary">
-                    Features
-                  </Typography>
-                </MenuItem>
-                <MenuItem
-                  onClick={() => scrollToSection('testimonials')}
-                  sx={{ py: '6px', px: '12px' }}
-                >
-                  <Typography variant="body2" color="text.primary">
-                    Top Críticos
-                  </Typography>
+                  <i className="fas fa-home" style={{ color: 'text.primary' }}></i>
                 </MenuItem>
                 <MenuItem
                   onClick={() => scrollToSection('highlights')}

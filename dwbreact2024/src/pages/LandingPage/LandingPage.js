@@ -7,8 +7,6 @@ import AppAppBar from '../../Components/CompLP/AppAppBar';
 import AuthenticatedAppBar from '../../Components/CompLP/AuthenticatedAppBar';
 import Hero from '../../Components/CompLP/Hero';
 import Highlights from '../../Components/CompLP/Highlights';
-import Features from '../../Components/CompLP/Features';
-import Testimonials from '../../Components/CompLP/Testimonials';
 import FAQ from '../../Components/CompLP/FAQ';
 import Footer from '../../Components/CompLP/Footer';
 import getLPTheme from './getLPTheme';
@@ -33,14 +31,9 @@ export default function LandingPage() {
       )}
       <Hero />
       <Box sx={{ bgcolor: 'background.default' }}>
-        <Features />
-        <Divider />
-        <Testimonials />
-        <Divider />
         <Highlights />
         <Divider />
         <FAQ />
-        <Divider />
         <Footer />
       </Box>
     </ThemeProvider>

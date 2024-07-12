@@ -14,6 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ToggleColorMode from './ToggleColorMode';
 import { useAuth } from '../LoginAuth/AuthContext';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const logoStyle = {
   width: '140px',
@@ -29,6 +30,7 @@ function AuthenticatedAppBar({ mode, toggleColorMode }) {
     setOpen(newOpen);
   };
 
+  const navigate = useNavigate();
   const handleLogout = () => {
     logout();
   };
@@ -137,9 +139,26 @@ function AuthenticatedAppBar({ mode, toggleColorMode }) {
                 display: { xs: 'none', md: 'flex' },
                 gap: 0.5,
                 alignItems: 'center',
+                marginRight: 2,
               }}
             >
               <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
+              <Button
+                color="primary"
+                variant="contained"
+                size="small"
+                onClick={() => navigate('/profile')}
+              >
+                Perfil
+              </Button>
+            </Box>
+            <Box
+              sx={{
+                display: { xs: 'none', md: 'flex' },
+                gap: 0.5,
+                alignItems: 'center',
+              }}
+            >
               <Button
                 color="primary"
                 variant="contained"

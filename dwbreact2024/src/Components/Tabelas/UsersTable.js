@@ -7,11 +7,13 @@ const UsersTable = () => {
         { label: 'Nome', type: 'text', name: 'nome' },
         { label: 'Email', type: 'email', name: 'email' },
         { label: 'Senha', type: 'password', name: 'senha' },
-        { label: 'Tipo', type: 'text', name: 'tipo' }
+        { label: 'Tipo', type: 'text', name: 'tipo' },
+        // ID_do_Grupo
+        { label: 'ID do Grupo', type: 'number', name: 'ID_do_Grupo'}
     ];
 
-    const tableHeaders = ['ID', 'Nome', 'Email', 'Senha', 'Tipo'];
-    const tableRowData = ['iD_do_User', 'nome', 'email', 'senha', 'tipo'];
+    const tableHeaders = ['ID', 'Nome', 'Email', 'Senha', 'Tipo', 'ID do Grupo'];
+    const tableRowData = ['iD_do_User', 'nome', 'email', 'senha', 'tipo', 'iD_do_Grupo'];
 
     return (
         <GenericTable

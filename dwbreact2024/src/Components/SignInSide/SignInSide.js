@@ -44,7 +44,7 @@ export default function SignInSide() {
 
     try {
       await login(user);
-      navigate('/test');    // Redirecionar para pág. guarded
+      navigate('/');    // Redirecionar para pág. guarded
     } catch (error) {
       console.error('Login failed', error);
     }

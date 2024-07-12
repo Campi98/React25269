@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Box, Typography, Button, CssBaseline, Divider, TextField } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Modal } from 'react-bootstrap';
-import AuthenticatedAppBar from '../Components/CompLP/AuthenticatedAppBar';
+import AppAppBar from '../Components/CompLP/AppAppBar';
 import getLPTheme from './LandingPage/getLPTheme';
 import { getViagens, createViagem, updateViagem, deleteViagem, getViagensByDestino} from '../Services/api';
 import ViagensTable from '../Components/Tabelas/ViagensTable';
 import SaveIcon from '@mui/icons-material/Save';
 import { useSearchParams} from 'react-router-dom';
+import GruposDeViagemTable from '../Components/Tabelas/GruposDeViagemTable';
+import UsersTable from '../Components/Tabelas/UsersTable';
 
 
 const Viagens = () => {
@@ -87,15 +89,12 @@ const Viagens = () => {
   return (
     <ThemeProvider theme={LPtheme}>
       <CssBaseline />
-      <AuthenticatedAppBar mode={mode} toggleColorMode={toggleColorMode} />
+      <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
       <Box sx={{ bgcolor: 'background.default', padding: 10 }}>
         <Typography variant="h4" gutterBottom>
-          Viagens Management
+          Viagens (e Relações das Tabelas)
         </Typography>
         <Divider sx={{ marginBottom: 2 }} />
-        <Button variant="contained" color="primary" onClick={() => { setIsEditing(false); setShowModal(true); }}>
-          Add New Viagem
-        </Button>
         <ViagensTable
         viagem={destino !== null ? destino : null}
           data={viagensData}
@@ -124,6 +123,8 @@ const Viagens = () => {
             </Button>
           </Modal.Body>
         </Modal>
+      <GruposDeViagemTable />   
+      <UsersTable />
       </Box>
     </ThemeProvider>
   );
