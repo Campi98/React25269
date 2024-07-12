@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Typography, Button, CssBaseline, Divider } from '@mui/material';
+import { Box, Typography, Button, CssBaseline, Divider, TextField } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Modal } from 'react-bootstrap';
 import { useAuth } from '../Components/LoginAuth/AuthContext';
@@ -7,6 +7,8 @@ import AuthenticatedAppBar from '../Components/CompLP/AuthenticatedAppBar';
 import getLPTheme from './LandingPage/getLPTheme';
 import { getUsers, getUserProfile, updatePerfil } from '../Services/api';
 import UserProfileImgHandler from '../Components/UserProfileImgHandler';
+import EditIcon from '@mui/icons-material/Edit';
+import SaveIcon from '@mui/icons-material/Save';
 
 const UserProfile = () => {
   const { isAuthenticated, userEmail, logout } = useAuth();
@@ -14,6 +16,9 @@ const UserProfile = () => {
   const [userData, setUserData] = useState(null);
   const [profileData, setProfileData] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedInterests, setEditedInterests] = useState('');
+  const [editedDestinations, setEditedDestinations] = useState('');
   const LPtheme = createTheme(getLPTheme(mode));
 
   useEffect(() => {
@@ -24,6 +29,8 @@ const UserProfile = () => {
         if (user) {
           getUserProfile(user.iD_do_User).then(profileResponse => {
             setProfileData(profileResponse.data);
+            setEditedInterests(profileResponse.data.interesses_de_Viagem);
+            setEditedDestinations(profileResponse.data.destinos_Favoritos);
           }).catch(profileError => {
             console.error('Error fetching profile data:', profileError);
           });
@@ -56,11 +63,28 @@ const UserProfile = () => {
         fotografia_do_User: base64String,
       };
       try {
-        console.log(`Attempting to update profile for profile ID ${profileData.iD_do_Perfil} with data:`, updatedProfile); // Logging for debugging
-        await updatePerfil(profileData.iD_do_Perfil, updatedProfile); // Use iD_do_Perfil here
-        handleUploadSuccess(); // Fetch the updated profile data after saving the image
+        console.log(`Attempting to update profile for profile ID ${profileData.iD_do_Perfil} with data:`, updatedProfile);
+        await updatePerfil(profileData.iD_do_Perfil, updatedProfile);
+        handleUploadSuccess();
       } catch (error) {
         console.error('Error updating profile image:', error);
+      }
+    }
+  };
+
+  const handleSaveChanges = async () => {
+    if (profileData) {
+      const updatedProfile = {
+        ...profileData,
+        interesses_de_Viagem: editedInterests,
+        destinos_Favoritos: editedDestinations,
+      };
+      try {
+        await updatePerfil(profileData.iD_do_Perfil, updatedProfile);
+        setProfileData(updatedProfile);
+        setIsEditing(false);
+      } catch (error) {
+        console.error('Error updating profile:', error);
       }
     }
   };
@@ -94,9 +118,37 @@ const UserProfile = () => {
                     <Button variant="contained" color="primary" onClick={() => setShowModal(true)}>
                       Upload New Photo
                     </Button>
-                    <Typography variant="body1">Interesses de Viagem: {profileData.interesses_de_Viagem}</Typography>
-                    <Typography variant="body1">Destinos Favoritos: {profileData.destinos_Favoritos}</Typography>
-                    <Typography variant="body1">Nível de Experiência em Viagens: {profileData.nivel_de_Experiencia_em_Viagens}</Typography>
+                    {isEditing ? (
+                      <>
+                        <TextField
+                          label="Interesses de Viagem"
+                          value={editedInterests}
+                          onChange={(e) => setEditedInterests(e.target.value)}
+                          fullWidth
+                          multiline
+                          sx={{ marginY: 2 }}
+                        />
+                        <TextField
+                          label="Destinos Favoritos"
+                          value={editedDestinations}
+                          onChange={(e) => setEditedDestinations(e.target.value)}
+                          fullWidth
+                          multiline
+                          sx={{ marginY: 2 }}
+                        />
+                        <Button variant="contained" color="primary" onClick={handleSaveChanges} startIcon={<SaveIcon />} sx={{ marginTop: 2 }}>
+                          Save Changes
+                        </Button>
+                      </>
+                    ) : (
+                      <>
+                        <Typography variant="body1">Interesses de Viagem: {profileData.interesses_de_Viagem}</Typography>
+                        <Typography variant="body1">Destinos Favoritos: {profileData.destinos_Favoritos}</Typography>
+                        <Button variant="contained" color="primary" onClick={() => setIsEditing(true)} startIcon={<EditIcon />} sx={{ marginTop: 2 }}>
+                          Edit
+                        </Button>
+                      </>
+                    )}
                   </>
                 ) : (
                   <Typography variant="body1">Loading profile data...</Typography>

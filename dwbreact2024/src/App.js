@@ -13,6 +13,7 @@ import { AuthProvider } from './Components/LoginAuth/AuthContext';
 import UserStatus from './Components/UserStatus';
 import PublicRoute from './Components/LoginAuth/PublicRoute';
 import UserProfile from './pages/UserProfile';
+import Viagens from './pages/Viagens';
 
 function App() {
 
@@ -29,6 +30,11 @@ function App() {
             <ProtectedRoute>
               <TestTables />
             </ProtectedRoute>
+          } />
+          <Route path="/viagens" element={
+            <PublicRoute>
+              <Viagens />
+            </PublicRoute>
           } />
           <Route path="/SignUp" element={
             <PublicRoute>

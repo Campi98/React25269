@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Button, Modal, Form, Alert } from 'react-bootstrap';
 
-const GenericTable = ({ fetchData, createData, updateData, deleteData, formFields, tableHeaders, tableRowData, itemKey, itemName }) => {
+const GenericTable = ({ fetchData, createData, updateData, deleteData, formFields, tableHeaders, tableRowData, itemKey, itemName, viagem }) => {
     const [items, setItems] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
@@ -10,8 +10,14 @@ const GenericTable = ({ fetchData, createData, updateData, deleteData, formField
 
     const fetchItems = async () => {
         try {
+            if(viagem){
+                const response = await fetchData(viagem);
+                setItems(response.data);
+                console.log(response.data);
+            }else{
             const response = await fetchData();
             setItems(response.data);
+            }
         } catch (error) {
             console.error(`Error fetching ${itemName.toLowerCase()}s:`, error);
             setErrors({ fetch: `Error fetching ${itemName.toLowerCase()}s: ${error.message}` });

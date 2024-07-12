@@ -13,6 +13,7 @@ import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import ToggleColorMode from './ToggleColorMode';
 import { useAuth } from '../LoginAuth/AuthContext';
+import { Link } from 'react-router-dom';
 
 const logoStyle = {
   width: '140px',
@@ -89,11 +90,13 @@ function AuthenticatedAppBar({ mode, toggleColorMode }) {
                 px: 0,
               }}
             >
-              <img
-                src={require('./site_ico.png')}
-                style={logoStyle}
-                alt="logo of sitemark"
-              />
+              <Link to="/">
+                <img
+                  src={require('./site_ico.png')}
+                  style={logoStyle}
+                  alt="logo of sitemark"
+                />
+              </Link>
               <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                 <MenuItem
                   onClick={() => scrollToSection('features')}

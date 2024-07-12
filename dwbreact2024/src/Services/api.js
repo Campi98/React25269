@@ -52,6 +52,8 @@ export const getViagens = () => api.get('/viagens');
 export const createViagem = (viagem) => api.post('/viagens', viagem);
 export const updateViagem = (id, viagem) => api.put(`/viagens/${id}`, viagem);
 export const deleteViagem = (id) => api.delete(`/viagens/${id}`);
+export const getViagensByDestino = (nome) => api.get(`/viagens/name/${nome}`);
+
 
 // Authentication
 export const loginUser = (user) => api.post('/account/login', user);

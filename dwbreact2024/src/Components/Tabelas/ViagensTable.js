@@ -1,8 +1,8 @@
 import React from 'react';
-import { getViagens, createViagem, updateViagem, deleteViagem } from '../../Services/api';
+import { getViagens, createViagem, updateViagem, deleteViagem, getViagensByDestino } from '../../Services/api';
 import GenericTable from './GenericTable';
 
-const ViagensTable = () => {
+const ViagensTable = ({viagem}) => {
     const formFields = [
         { label: 'Fotografia', type: 'text', name: 'fotografia_relacionada_com_a_viagem' },
         { label: 'Destino', type: 'text', name: 'destino' },
@@ -17,9 +17,12 @@ const ViagensTable = () => {
     const tableHeaders = ['ID', 'Fotografia', 'Destino', 'Data de Início', 'Data de Fim', 'Descrição', 'Itinerário', 'Dicas e Recomendações', 'Rating'];
     const tableRowData = ['iD_da_Viagem', 'fotografia_relacionada_com_a_viagem', 'destino', 'data_de_Inicio', 'data_de_Fim', 'descricao', 'itinerario', 'dicas_e_Recomendacoes', 'rating_da_Viagem'];
 
+    console.log(viagem);
+
     return (
         <GenericTable
-            fetchData={getViagens}
+            fetchData={viagem ? getViagensByDestino : getViagens}
+            viagem={viagem}
             createData={createViagem}
             updateData={updateViagem}
             deleteData={deleteViagem}
