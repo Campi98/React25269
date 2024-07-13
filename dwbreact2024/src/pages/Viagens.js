@@ -92,7 +92,7 @@ const Viagens = () => {
       <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
       <Box sx={{ bgcolor: 'background.default', padding: 10 }}>
         <Typography variant="h4" gutterBottom>
-          Viagens (e Relações das Tabelas)
+          Viagens
         </Typography>
         <Divider sx={{ marginBottom: 2 }} />
         <ViagensTable
