@@ -7,6 +7,8 @@ import GruposDeViagemTable from '../Components/Tabelas/GruposDeViagemTable';
 import AlojamentosTable from '../Components/Tabelas/AlojamentosTable';
 import MensagensTable from '../Components/Tabelas/MensagensTable';
 import ImagensTable from '../Components/Tabelas/ImagensTable';
+import ViagemGruposTable from '../Components/Tabelas/ViagemGruposTable';
+import { useNavigate } from 'react-router-dom';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -29,6 +31,7 @@ function TabPanel(props) {
 
 const TestTables = () => {
     const [value, setValue] = React.useState(0);
+    const navigate = useNavigate();
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -36,7 +39,8 @@ const TestTables = () => {
 
     return (
         <div>
-            <h1>Testing:</h1>
+            <h1>BackOffice</h1>
+            <button onClick={() => navigate('/')}>Voltar à Homepage</button>
             <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
                 <Tab label="Alojamentos" />
                 <Tab label="Mensagens" />
@@ -45,6 +49,7 @@ const TestTables = () => {
                 <Tab label="Users" />
                 <Tab label="Perfis" />
                 <Tab label="Imagens" />
+                <Tab label="Viagem Grupos" />
             </Tabs>
             <TabPanel value={value} index={0}>
                 <AlojamentosTable />
@@ -66,6 +71,9 @@ const TestTables = () => {
             </TabPanel>
             <TabPanel value={value} index={6}>
                 <ImagensTable />
+            </TabPanel>
+            <TabPanel value={value} index={7}>
+                <ViagemGruposTable />
             </TabPanel>
         </div>
     );

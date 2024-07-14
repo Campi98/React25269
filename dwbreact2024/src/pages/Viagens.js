@@ -3,16 +3,17 @@ import { Box, Typography, Button, CssBaseline, Divider, TextField } from '@mui/m
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Modal } from 'react-bootstrap';
 import AppAppBar from '../Components/CompLP/AppAppBar';
+import AuthenticatedAppBar from '../Components/CompLP/AuthenticatedAppBar';
 import getLPTheme from './LandingPage/getLPTheme';
-import { getViagens, createViagem, updateViagem, deleteViagem, getViagensByDestino} from '../Services/api';
+import { getViagens, createViagem, updateViagem, deleteViagem, getViagensByDestino } from '../Services/api';
 import ViagensTable from '../Components/Tabelas/ViagensTable';
 import SaveIcon from '@mui/icons-material/Save';
-import { useSearchParams} from 'react-router-dom';
-import GruposDeViagemTable from '../Components/Tabelas/GruposDeViagemTable';
-import UsersTable from '../Components/Tabelas/UsersTable';
-
+import { useSearchParams } from 'react-router-dom';
+import UsersByGroupTable from '../Components/Tabelas/UsersByGroupTable';
+import { useAuth } from '../Components/LoginAuth/AuthContext';
 
 const Viagens = () => {
+  const { isAuthenticated } = useAuth();
   const [mode, setMode] = useState('dark');
   const [viagensData, setViagensData] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -21,11 +22,9 @@ const Viagens = () => {
   const [currentViagem, setCurrentViagem] = useState(null);
   const LPtheme = createTheme(getLPTheme(mode));
 
-  //get query params from url for destination name using react-router-dom
   const [search] = useSearchParams();
 
   const destino = search.get('destino');
-  
 
   const formFields = [
     { label: 'Fotografia', type: 'text', name: 'fotografia_relacionada_com_a_viagem' },
@@ -43,22 +42,20 @@ const Viagens = () => {
   }, []);
 
   const fetchViagens = () => {
-
-    if(search.get('destino') !== null){
-      getViagensByDestino(search.get('destino')).then(response => {
+    if (destino !== null) {
+      getViagensByDestino(destino).then(response => {
         setViagensData(response.data);
       }).catch(error => {
         console.error('Error fetching viagens data:', error);
       });
-    }
-    else {   
+    } else {
       getViagens().then(response => {
         setViagensData(response.data);
       }).catch(error => {
         console.error('Error fetching viagens data:', error);
       });
-    };
-  }
+    }
+  };
 
   const toggleColorMode = () => {
     setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
@@ -89,14 +86,18 @@ const Viagens = () => {
   return (
     <ThemeProvider theme={LPtheme}>
       <CssBaseline />
-      <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
+      {isAuthenticated ? (
+        <AuthenticatedAppBar mode={mode} toggleColorMode={toggleColorMode} />
+      ) : (
+        <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
+      )}
       <Box sx={{ bgcolor: 'background.default', padding: 10 }}>
         <Typography variant="h4" gutterBottom>
           Viagens
         </Typography>
         <Divider sx={{ marginBottom: 2 }} />
         <ViagensTable
-        viagem={destino !== null ? destino : null}
+          viagem={destino !== null ? destino : null}
           data={viagensData}
           onEdit={handleEdit}
           onDelete={handleDelete}
@@ -123,8 +124,7 @@ const Viagens = () => {
             </Button>
           </Modal.Body>
         </Modal>
-      <GruposDeViagemTable />   
-      <UsersTable />
+        <UsersByGroupTable />
       </Box>
     </ThemeProvider>
   );

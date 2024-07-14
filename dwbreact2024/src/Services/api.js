@@ -41,6 +41,9 @@ export const createPerfil = (perfil) => api.post('/perfis', perfil);
 export const updatePerfil = (id, perfil) => api.put(`/perfis/${id}`, perfil);
 export const deletePerfil = (id) => api.delete(`/perfis/${id}`);
 
+// novo
+export const getUserProfile = (id) => api.get(`/perfis/${id}`);  
+
 // Users
 export const getUsers = () => api.get('/users');
 export const createUser = (user) => api.post('/users', user);
@@ -62,7 +65,13 @@ export const logoutUser = () => api.post('/account/logout');
 export const checkAuthStatus = () => api.get('/account/status');
 
 
-// novo
-export const getUserProfile = (id) => api.get(`/perfis/${id}`);  
+
+
+// ViagemGrupos
+export const getViagemGrupos = () => api.get('/viagemgruposreact');
+export const createViagemGrupo = (viagemGrupo) => api.post('/viagemgruposreact', viagemGrupo);
+export const updateViagemGrupo = (viagemId, grupoDeViagemId, viagemGrupo) => api.put(`/viagemgruposreact/${viagemId}/${grupoDeViagemId}`, viagemGrupo);
+export const deleteViagemGrupo = (viagemId, grupoDeViagemId) => api.delete(`/viagemgruposreact/${viagemId}/${grupoDeViagemId}`);
+
 
 export default api;

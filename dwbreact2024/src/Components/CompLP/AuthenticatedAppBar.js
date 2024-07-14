@@ -98,8 +98,8 @@ function AuthenticatedAppBar({ mode, toggleColorMode }) {
                   style={logoStyle}
                   alt="logo of sitemark"
                   onClick={(e) => {
-                    e.preventDefault(); // Prevent Link navigation
-                    window.scrollTo(0, 0); // Scroll to the top of the page
+                    e.preventDefault();
+                    window.scrollTo(0, 0);
                   }}
                 />
               </Link>
@@ -116,7 +116,7 @@ function AuthenticatedAppBar({ mode, toggleColorMode }) {
                   sx={{ py: '6px', px: '12px' }}
                 >
                   <Typography variant="body2" color="text.primary">
-                    Highlights
+                    Acerca
                   </Typography>
                 </MenuItem>
                 <MenuItem
@@ -200,7 +200,7 @@ function AuthenticatedAppBar({ mode, toggleColorMode }) {
                     Testimonials
                   </MenuItem>
                   <MenuItem onClick={() => scrollToSection('highlights')}>
-                    Highlights
+                    Acerca
                   </MenuItem>
                   <MenuItem onClick={() => scrollToSection('pricing')}>
                     Pricing

@@ -27,9 +27,9 @@ const items = [
   },
   {
     icon: <ConstructionRoundedIcon />,
-    title: 'Disciplina',
+    title: 'Aluno',
     description:
-      'Desenvolvimento Web 2023/2024, 2º Semestre',
+      'João Campos nº25269 Turma A',
   },
   {
     icon: <ThumbUpAltRoundedIcon />,
@@ -96,12 +96,7 @@ export default function Highlights() {
           }}
         >
           <Typography component="h2" variant="h4">
-            Highlights
-          </Typography>
-          <Typography variant="body1" sx={{ color: 'grey.400' }}>
-            Explore why our product stands out: adaptability, durability,
-            user-friendly design, and innovation. Enjoy reliable customer support and
-            precision in every detail.
+            Acerca
           </Typography>
         </Box>
         <Grid container spacing={2.5}>

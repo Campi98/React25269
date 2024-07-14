@@ -9,6 +9,7 @@ import TestTables from './pages/TestTables';
 import TestSignInSide from './pages/TestSignInSide';
 import LandingPage from './pages/LandingPage/LandingPage';
 import ProtectedRoute from './Components/LoginAuth/ProtectedRoute';
+import AdminRoute from './Components/LoginAuth/AdminRoute';
 import { AuthProvider } from './Components/LoginAuth/AuthContext';
 import PublicRoute from './Components/LoginAuth/PublicRoute';
 import UserProfile from './pages/UserProfile';
@@ -19,16 +20,17 @@ function App() {
   // Código de Terceiros:
   // Sign-In-Side / Sign-Up / Landing Page:
   // https://github.com/mui/material-ui/tree/v5.15.21/docs/data/material/getting-started/templates
+  // + Uso de GitHub Copilot para sugestões de código; e tirar dúvidas ao encontrar erros.
 
   return (
     <AuthProvider>
       <div id="page-top">
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/test" element={
-            <ProtectedRoute>
+          <Route path="/BackOffice" element={
+            <AdminRoute>
               <TestTables />
-            </ProtectedRoute>
+            </AdminRoute>
           } />
           <Route path="/viagens" element={
             <PublicRoute>

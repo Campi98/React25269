@@ -41,7 +41,7 @@ export default function SignUp() {
       Nome: data.get('firstName') + ' ' + data.get('lastName'),
       Email: data.get('email'),
       Senha: data.get('password'),
-      Tipo: 'User' // ou outro valor padrão
+      Tipo: 'User'
     };
 
     try {

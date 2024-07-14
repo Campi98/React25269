@@ -100,7 +100,7 @@ const UserProfile = () => {
       };
       try {
         await updatePerfil(profileData.iD_do_Perfil, updatedProfile);
-        await updateUser(userData.iD_do_User, updatedUser); // Update user's group ID in the database
+        await updateUser(userData.iD_do_User, updatedUser);
         setProfileData(updatedProfile);
         setUserData(updatedUser);
         setIsEditing(false);

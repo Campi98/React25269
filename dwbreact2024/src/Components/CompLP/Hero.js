@@ -7,9 +7,11 @@ import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import { useAuth } from "../LoginAuth/AuthContext";
 
 export default function Hero() {
   const [search, setSearch] = React.useState("");
+  const { isAdmin } = useAuth();
 
   return (
     <Box
@@ -33,6 +35,28 @@ export default function Hero() {
           pb: { xs: 8, sm: 12 },
         }}
       >
+      {isAdmin && (
+        <Box sx={{ textAlign: 'center', marginTop: 1, marginBottom: 5 }}>
+          <Typography variant="h6" gutterBottom>
+            Backoffices
+          </Typography>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => window.location.href = '/BackOffice'}
+            style={{ marginRight: '10px' }} // Add some spacing between the buttons
+          >
+            React
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary" // Use a different color for distinction
+            onClick={() => window.location.href = 'https://localhost:7070/'}
+          >
+            .NET
+          </Button>
+        </Box>
+      )}
         <Stack spacing={2} useFlexGap sx={{ width: { xs: "100%", sm: "70%" } }}>
           <Typography
             variant="h1"

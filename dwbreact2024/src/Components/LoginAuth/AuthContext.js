@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { loginUser, logoutUser, checkAuthStatus } from '../../Services/api';
+import { loginUser, logoutUser, checkAuthStatus, getUsers } from '../../Services/api';
 
 const AuthContext = createContext();
 
@@ -8,6 +8,7 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userEmail, setUserEmail] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -16,16 +17,16 @@ export const AuthProvider = ({ children }) => {
     if (storedAuth === 'true' && storedEmail) {
       checkAuthStatus()
         .then(response => {
-          console.debug('Auth status response:', response.data); // Debug
           setIsAuthenticated(response.data.isAuthenticated);
           setUserEmail(storedEmail);
-          setLoading(false);
           if (response.data.isAuthenticated) {
             localStorage.setItem('isAuthenticated', 'true');
+            checkAdminStatus(storedEmail);
           } else {
             localStorage.removeItem('isAuthenticated');
             localStorage.removeItem('userEmail');
           }
+          setLoading(false);
         })
         .catch(error => {
           console.error('Error fetching auth status:', error); // Debug
@@ -40,25 +41,42 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
+  const checkAdminStatus = async (email) => {
+    try {
+      const response = await getUsers();
+      const users = response.data;
+      const user = users.find(u => u.email === email);
+      if (user && user.tipo === 'Admin') {
+        setIsAdmin(true);
+      } else {
+        setIsAdmin(false);
+      }
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      setIsAdmin(false);
+    }
+  };
+
   const login = async (credentials) => {
     const response = await loginUser(credentials);
-    console.debug('Login response:', response.data); // Debug
     setIsAuthenticated(true);
     setUserEmail(credentials.email);
     localStorage.setItem('isAuthenticated', 'true');
     localStorage.setItem('userEmail', credentials.email);
+    checkAdminStatus(credentials.email);
   };
 
   const logout = async () => {
     await logoutUser();
     setIsAuthenticated(false);
     setUserEmail(null);
+    setIsAdmin(false);
     localStorage.removeItem('isAuthenticated');
     localStorage.removeItem('userEmail');
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, userEmail, login, logout, loading }}>
+    <AuthContext.Provider value={{ isAuthenticated, userEmail, isAdmin, login, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );

@@ -63,6 +63,8 @@ export default function Footer() {
             </Typography>
             <Typography variant="body2" color="text.secondary" mb={2}>
               Sign-In-Side / Sign-Up / Landing Page: <a href="https://github.com/mui/material-ui/tree/v5.15.21/docs/data/material/getting-started/templates" target="_blank" rel="noopener noreferrer">Github.com/mui</a>
+              <p>+ Uso de GitHub Copilot para sugestões de código; e tirar dúvidas ao encontrar erros.
+</p>
             </Typography>
           </Box>
         </Box>
